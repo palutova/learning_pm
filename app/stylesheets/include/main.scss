@@ -1,0 +1,47 @@
+@import "mixin";
+
+html, body { height: 100%; }
+
+
+
+#wraper {
+  display: block;
+  margin: auto;
+  background: #fefefe;
+  min-height: 100%;
+}
+  .wrap {
+    display: block;
+    margin: 0 auto;
+  }
+
+  .holder {
+    padding: 0 15px;
+  }
+
+  .b-main-cont {
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    background: #fff;
+    min-height: 400px;
+  }
+
+/* header styles */
+/* end header styles */
+
+/* footer styles */
+.m-ftr {
+  overflow: hidden;
+  background: #000000;
+  color: $clr-ftr-text;
+}
+
+  .m-ftr-copy {
+    display: block;
+    overflow: hidden;
+    text-align: center;
+    padding: 10px 0 20px;
+    font: 14px/18px $font;
+  }
+/* end footer styles */

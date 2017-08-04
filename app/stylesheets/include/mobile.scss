@@ -1,0 +1,21 @@
+@import "mixin.scss";
+
+
+  .wrap {
+    min-width: 320px;
+    max-width: 480px;
+  }
+  .holder {
+    padding: 0 15px;
+    &.wrap {
+      box-sizing: border-box;
+    }
+  }
+
+/* footer styles */
+
+.m-ftr-social {
+  padding-bottom: 15px
+}
+
+/* end footer styles */

@@ -1,0 +1,190 @@
+@import "mixin";
+/*!
+ * Screen base styles
+ *  taken from Bootstrap v3.2.0 | MIT License | getbootstrap.com
+ */
+
+body, html {
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 10px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+  font-family: $font;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #000;
+  background-color: #fff;
+}
+
+a {
+  color: $clr-lnk;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+a:hover,
+a:focus {
+  color: $clr-lnk-hover;
+  text-decoration: underline;
+}
+a:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+/* anchor underline variants */
+/* - single line only variant -
+  display: inline-block;
+  border-bottom: 1px solid;
+  line-height: 90%;
+*/
+/* - good variant for single color inline link (can be multiline) -
+  background: url('one_px_428bca.png') repeat-x left 1.26em;
+*/
+
+figure {
+  margin: 0;
+}
+img {
+  vertical-align: middle;
+  border: none;
+}
+
+@-ms-viewport { width: device-width; }
+
+/* form basis */
+/*!
+ * Forms base styles
+ *  taken from Bootstrap v3.2.0 | MIT License | getbootstrap.com
+ */
+
+input,
+button,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+fieldset {
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+legend {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 1em;
+  line-height: inherit;
+  font-weight: bold;
+  border: 0;
+}
+.f-label,
+label {
+  font: 18px/22px $font;
+  display: inline-block;
+  vertical-align: inherit;
+  max-width: 100%;
+}
+input[type="radio"],
+input[type="checkbox"] {
+  margin: 5px 3px;
+  line-height: normal;
+}
+input[type="file"] {
+  display: block;
+}
+input[type="range"] {
+  display: block;
+  width: 100%;
+}
+.f-input,
+input[type="search"],
+input[type="text"],
+input[type="email"],
+input[type="phone"],
+input[type="number"],
+textarea {
+  font: 18px/33px $font;
+  padding: 0 15px;
+  border-radius: 5px;
+  border: 1px solid #c5c5c5;
+  outline: none;
+  &:focus {
+    box-shadow: 0 0 3px 1px #0095FD;
+  }
+}
+
+textarea.f-input {
+  min-height: 79px;
+  font: 18px/22px $font;
+  padding: 4px 15px 3px;
+}
+
+select[multiple],
+select[size] {
+  height: auto;
+}
+input[type="file"]:focus,
+input[type="radio"]:focus,
+input[type="checkbox"]:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+output {
+  display: block;
+  padding-top: 7px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+}
+input[type="search"] {
+  -webkit-appearance: none;
+}
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
+input[type="month"] {
+  line-height: 34px;
+  line-height: 1.42857143 \0;
+}
+input[type="date"].input-sm,
+input[type="time"].input-sm,
+input[type="datetime-local"].input-sm,
+input[type="month"].input-sm {
+  line-height: 30px;
+}
+input[type="date"].input-lg,
+input[type="time"].input-lg,
+input[type="datetime-local"].input-lg,
+input[type="month"].input-lg {
+  line-height: 46px;
+}
+input[type="radio"][disabled],
+input[type="checkbox"][disabled],
+input[type="radio"].disabled,
+input[type="checkbox"].disabled,
+fieldset[disabled] input[type="radio"],
+fieldset[disabled] input[type="checkbox"] {
+  cursor: not-allowed;
+}
+
+ul, ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  li {
+    padding: 0;
+    margin: 0;
+  }
+}
+/* end form basis */

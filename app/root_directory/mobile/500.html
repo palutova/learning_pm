@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>BURDA</title>
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, maximum-scale=1.0"/>
+  <meta name="HandheldFriendly" content="True"/>
+  <meta name="MobileOptimized" content="480"/>
+  <meta content="no" http-equiv="msthemecompatible">
+  <meta content="BURDA" itemprop="name">
+  <link href="/favicon.ico" rel="icon" sizes="16x16 32x32 48x48 64x64">
+
+
+  <style>
+
+      @font-face {
+        font-family: 'Circe';
+        src: url('../fonts/988_55.eot');
+        src: url('../fonts/988_55.eot') format('embedded-opentype'),
+             url('../fonts/988_55.woff2') format('woff2'),
+             url('../fonts/988_55.woff') format('woff'),
+             url('../fonts/988_55.ttf') format('truetype'),
+             url('../fonts/988_55.svg#988_55') format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'Circe';
+        src: url('../fonts/988а-BOLD.eot');
+        src: url('../fonts/988а-BOLD.eot') format('embedded-opentype'),
+             url('../fonts/988а-BOLD.woff2') format('woff2'),
+              url('../fonts/988а-BOLD.woff') format('woff'),
+             url('../fonts/988а-BOLD.ttf') format('truetype'),
+             url('../fonts/988а-BOLD.svg#988_bold') format('svg');
+        font-weight: bold;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'Circe';
+        src: url('../fonts/988_25.eot');
+        src: url('../fonts/988_25.eot') format('embedded-opentype'),
+             url('../fonts/988_25.woff2') format('woff2'),
+             url('../fonts/988_25.woff') format('woff'),
+             url('../fonts/988_25.ttf') format('truetype'),
+             url('../fonts/988_25.svg#988_25') format('svg');
+        font-weight: 300;
+        font-style: normal;
+      }
+      html,body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: #000;
+        color: #727272;
+        font: 18px/22px 'Circe', Arial, sans-serif;
+      }
+      a {
+        color: #007cd4 !important;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .m-wrapper {
+        display: block;
+        min-width: 320px;
+        max-width: 480px;
+        min-height: 100%;
+        box-sizing: border-box;
+        position: relative;
+        margin: 0 auto;
+        padding: 30px 15px;
+      }
+        .dialog-img {
+          display: block;
+          margin: 0 0 30px;
+          text-decoration: none !important;
+          overflow: hidden;
+          text-align: center;
+          max-width: 353px;
+        }
+          .dialog-img > img {
+            width: 100%;
+            height: auto;
+          }
+        .dialog-info {
+          display: block;
+          max-width: 365px;
+          overflow: hidden;
+        }
+          .dialog-info-title {
+            font: 300 60px/60px 'Circe', Arial, sans-serif;
+            margin: 0 0 10px;
+          }
+          .dialog-info-text {
+            font: 18px/22px 'Circe', Arial, sans-serif;
+            margin: 0;
+          }
+          .dialog-info-text > p { margin: 0; }
+    </style>
+  </head>
+
+  <body>
+   <div class="m-wrapper">
+     <a href="/" title="Перейти на главную" class="dialog-img">
+       <img src="/error_image.png" alt="error" class="dialog--img-logo" />
+     </a>
+     <div class="dialog-info">
+       <div class="dialog-info-title">500</div>
+       <p class="dialog-info-text">
+         На сервере произошла ошибка.
+         <br/>
+         Попробуйте начать с <a href="/" title="Перейти на главную">главной</a>
+       </p>
+     </div>
+   </div>
+  </body>
+  </html>

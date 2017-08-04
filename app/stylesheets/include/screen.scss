@@ -1,0 +1,45 @@
+@import "mixin.scss";
+
+
+
+/** STICKY FOOTER /
+#wrap {
+  min-height: 100%;
+  margin-bottom: -72px; }
+  #wrap:after {
+    content: " ";
+    display: block;
+    height: 72px; }
+#footer { height: 72px; background: silver; }
+/** END OF STICKY FOOTER FUNCTIONAL **/
+
+html, body {
+  min-width: 980px;
+}
+  .wrap {
+    min-width: 980px;
+    max-width: 1400px;
+    &.holder {
+      box-sizing: border-box;
+    }
+  }
+
+  .holder {
+    padding: 0 15px;
+  }
+  .b-main-cont {
+    min-height: 450px;
+    &.with-pddng-btm {
+      padding-bottom: 20px;
+    }
+  }
+
+
+/* footer styles */
+
+  .m-ftr-copy {
+    padding: 10px 0 20px;
+  }
+
+/* end footer styles */
+
