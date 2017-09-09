@@ -1,34 +1,30 @@
 {
-  "name": "gulp_template",
+  "name": "gulp",
   "version": "3.9.0",
   "main": "gulpfile.js",
   "dependencies": {
-    "gulp": "3.9.0",
     "browserify": "^11.0.1",
-    "browserify-shim": "^3.8.10",
-    "coffeeify": "^1.1.0",
-    "connect": "^3.4.0",
-    "event-stream": "^3.3.1",
-    "gulp-autoprefixer": "^2.3.1",
-    "gulp-coffee": "^2.3.1",
-    "gulp-concat": "^2.6.0",
-    "gulp-csso": "^1.0.0",
-    "gulp-file-include": "^0.13.7",
-    "gulp-git": "^1.2.4",
+    "connect": "^3.6.3",
+    "event-stream": "^3.3.4",
+    "gulp": "3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-coffee": "^2.3.4",
+    "gulp-concat": "^2.6.1",
+    "gulp-csso": "^3.0.0",
+    "gulp-file-include": "^1.2.0",
+    "gulp-git": "^2.4.2",
     "gulp-headerfooter": "^1.0.3",
-    "gulp-livereload": "^3.8.0",
-    "gulp-myth": "^1.0.3",
-    "gulp-uglify": "^1.2.0",
-    "gulp-util": "^3.0.6",
-    "imagesloaded": "^3.1.8",
-    "isotope-layout": "^2.2.1",
-    "isotope-packery": "^1.1.3",
-    "jquery": "^2.1.4",
-    "st": "^0.5.5",
+    "gulp-myth": "^1.1.0",
+    "gulp-uglify": "^3.0.0",
+    "imagesloaded": "^4.1.3",
+    "isotope-layout": "^3.0.4",
+    "isotope-packery": "^2.0.0",
+    "jquery": "^3.2.1",
+    "st": "^1.2.0",
     "vinyl-source-stream": "^1.1.0"
   },
   "browser": {
-    "jqplugin": "./app/javascripts/vendor/jquery-1.11.3.min.js"
+    "jqplugin": "./assets/javascripts/vendor/jquery-1.11.3.min.js"
   },
   "browserify": {
     "transform": [
@@ -45,32 +41,32 @@
     }
   },
   "devDependencies": {
-    "browserify": "~11.0.1",
-    "browserify-shim": "^3.8.10",
-    "coffeeify": "~1.1.0",
-    "gulp-clean": "^0.3.1",
-    "gulp-data": "^1.2.0",
-    "gulp-if": "^1.2.5",
+    "browserify": "~14.4.0",
+    "browserify-shim": "^3.8.14",
+    "coffeeify": "^2.1.0",
+    "gulp-clean": "^0.3.2",
+    "gulp-data": "^1.2.1",
+    "gulp-if": "^2.0.2",
     "gulp-if-else": "^1.0.3",
     "gulp-jade": "^1.1.0",
-    "gulp-ruby-sass": "^1.2.0",
-    "gulp-sass": "^2.0.4",
+    "gulp-livereload": "^3.8.1",
+    "gulp-ruby-sass": "^2.1.1",
+    "gulp-sass": "^3.1.0",
     "gulp-streamify": "^1.0.0",
-    "isotope-layout": "^2.2.1",
-    "isotope-packery": "^1.1.3",
-    "jquery-bridget": "^1.1.0",
-    "jquery-ui": "^1.10.5",
-    "vinyl-source-stream": "~0.1.1"
+    "gulp-util": "^3.0.8",
+    "isotope-layout": "^3.0.4",
+    "isotope-packery": "^2.0.0",
+    "jquery-bridget": "^2.0.1",
+    "jquery-ui": "^1.12.1",
+    "vinyl-source-stream": "~1.1.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "author": "I'am",
+  "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/elena_palutova/burda_gulp.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "homepage": "https://bitbucket.org/elena_palutova/burda_gulp#readme",
-  "description": ""
+    "url": "git@gitlab.com:elena_b/my-gulp-template.git"
+  }
 }

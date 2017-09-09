@@ -25,7 +25,8 @@ var gulp = require('gulp'), // Сообственно Gulp JS
     connect = require('connect'), // Webserver
     http = require('http'), //to start server
     st = require('st'), //to start server
-    clean = require('gulp-clean'); // to remove folders end files
+    clean = require('gulp-clean'), // to remove folders end files
+    util = require('gulp-util');
 
 var isBuild = false,
     isMobile = false;
@@ -144,47 +145,39 @@ var path = {
 
 };
 
+var cur_path = util.env.mobile ? path.mobile : path.desktop;
+
 // server create
 gulp.task('server', function(done) {
    http.createServer(
      st({ path: __dirname + '/www', index: 'index.html', cache: false })
-   ).listen(8080, done);
+   ).listen(8001, done);
 });
 // end server create
 
 // SCSS init
 gulp.task('sass', function () {
-   //gulp.src( ifElse(isBuild, function(){ return path.desktop.css.build + '/*' }, function(){ return path.desktop.css.to + '/*' }), {read: false} )
-   //    .pipe(clean());
-    var p = isMobile? path.mobile : path.desktop;
-
-    //sass(p.css.from)
-    //   .on('error', function (err) {
-    //     console.error('Error!', err.message); // Если есть ошибки, выводим и продолжаем
-    //   })
-    gulp.src(p.css.from)
+    gulp.src(cur_path.css.from)
         .pipe(sass().on('error', sass.logError))
         .pipe(autoprefixer()) // добавляем префиксы
         .pipe(ifElse(isBuild,function(){return csso()}) )
-        .pipe(gulp.dest( ifElse(isBuild,function(){ return  p.css.build }, function(){ return p.css.to }) )) // записываем css
+        .pipe(gulp.dest( ifElse(isBuild,function(){ return  cur_path.css.build }, function(){ return cur_path.css.to }) )) // записываем css
         .pipe(livereload()); // даем команду на перезагрузку css
 });
 
 
 // copy root files
 gulp.task('root_dir', function() {
-    var p = isMobile? path.mobile : path.desktop;
-    gulp.src(p.root_directory.from)
-       .pipe(gulp.dest(ifElse(isBuild, function(){ return p.root_directory.build }, function(){ return p.root_directory.to })));
+    gulp.src(cur_path.root_directory.from)
+       .pipe(gulp.dest(ifElse(isBuild, function(){ return cur_path.root_directory.build }, function(){ return cur_path.root_directory.to })));
 });
 // end copy root files
 
 // copy fonts
 gulp.task('css_vendor', function() {
-    var p = isMobile? path.mobile : path.desktop;
-    gulp.src(p.css.from_vendor)
+    gulp.src(cur_path.css.from_vendor)
        .pipe(ifElse(isBuild,function(){return csso()}) )
-       .pipe(gulp.dest(ifElse(isBuild, function(){ return p.css.build_vendor }, function(){ return p.css.to_vendor })));
+       .pipe(gulp.dest(ifElse(isBuild, function(){ return cur_path.css.build_vendor }, function(){ return cur_path.css.to_vendor })));
 });
 // end copy fonts
 
@@ -192,140 +185,90 @@ gulp.task('css_vendor', function() {
 
 //js init
 gulp.task('browserify', function() {
-    var p = isMobile? path.mobile : path.desktop;
-   gulp.src( ifElse(isBuild, function(){ return p.js.build  + '/*' }, function(){ return p.js.to + '/*' }) ).pipe(clean());
+   gulp.src( ifElse(isBuild, function(){ return cur_path.js.build  + '/*' }, function(){ return cur_path.js.to + '/*' }) ).pipe(clean());
    var b = browserify({
-       entries: [p.js.source],
+       entries: [cur_path.js.source],
        read: false,
        extensions: ['.coffee'],
-       exclude: [p.js.from_vendors]
+       exclude: [cur_path.js.from_vendors]
    });
    b.bundle()
    // Передаем имя файла, который получим на выходе, vinyl-source-stream
-   .pipe(vinyl(p.js.file_name))
+   .pipe(vinyl(cur_path.js.file_name))
    .pipe(ifElse(isBuild,function(){return streamify(uglify())}))
-   .pipe(gulp.dest(  ifElse(isBuild,function(){ return  p.js.build }, function(){ return p.js.to })  ));
+   .pipe(gulp.dest(  ifElse(isBuild,function(){ return  cur_path.js.build }, function(){ return cur_path.js.to })  ));
 });
 //end js init
 
 
 // init html
 gulp.task('html', function(){
-   var p = isMobile? path.mobile : path.desktop;
-   gulp.src( ifElse(isBuild, function(){ return p.html.build  + '/*.html' }, function(){ return p.html.to + '/*.html' }) ).pipe(clean());
-   gulp.src(p.html.template_point)
+    if (isBuild==true) {
+        gulp.src(ifElse(isBuild, function () {
+            return cur_path.html.build + '/*.html'
+        }, function () {
+            return cur_path.html.to + '/*.html'
+        })).pipe(clean());
+    }
+    gulp.src(cur_path.html.template_point)
 
    .pipe(fileinclude({
      prefix: '@@',
      basepath: '@file',
      indent: true
    }))
-   .pipe(gulp.dest( ifElse(isBuild, function(){ return p.html.build }, function(){ return p.html.to}) ));
+   .pipe(gulp.dest( ifElse(isBuild, function(){ return cur_path.html.build }, function(){ return cur_path.html.to}) ))
+    .pipe(livereload());
 });
 //end init html
 
 // copy images
 gulp.task('images', function() {
-    var p = isMobile? path.mobile : path.desktop;
-    gulp.src( ifElse(isBuild, function(){ return p.images.build  + '/*'}, function(){ return p.images.to + '/*' }) ).pipe(clean());
-    gulp.src(p.images.from)
-        .pipe(gulp.dest( ifElse(isBuild, function(){ return p.images.build }, function(){ return p.images.to}) ));
+    gulp.src( ifElse(isBuild, function(){ return cur_path.images.build  + '/*'}, function(){ return cur_path.images.to + '/*' }) ).pipe(clean());
+    gulp.src(cur_path.images.from)
+        .pipe(gulp.dest( ifElse(isBuild, function(){ return cur_path.images.build }, function(){ return cur_path.images.to}) ));
 });
 gulp.task('images_content', function() {
-    var p = isMobile? path.mobile : path.desktop;
-    gulp.src( ifElse(isBuild, function(){ return p.images_content.build  + '/*' }, function(){ return p.images_content.to + '/*' }) ).pipe(clean());
-    gulp.src(p.images_content.from)
-       .pipe(gulp.dest( ifElse(isBuild, function(){ return p.images_content.build }, function(){ return p.images_content.to}) ));
+    gulp.src( ifElse(isBuild, function(){ return cur_path.images_content.build  + '/*' }, function(){ return cur_path.images_content.to + '/*' }) ).pipe(clean());
+    gulp.src(cur_path.images_content.from)
+       .pipe(gulp.dest( ifElse(isBuild, function(){ return cur_path.images_content.build }, function(){ return cur_path.images_content.to}) ));
 });
 // end copy images
 // copy fonts
 gulp.task('fonts', function() {
-   var p = isMobile? path.mobile : path.desktop;
-   gulp.src( ifElse(isBuild, function(){ return p.fonts.build + '/*' }, function(){ return p.fonts.to + '/*'}) ).pipe(clean());
-   gulp.src(p.fonts.from)
-       .pipe(gulp.dest(  ifElse(isBuild, function(){ return p.fonts.build }, function(){ return p.fonts.to}) ));
+   gulp.src( ifElse(isBuild, function(){ return cur_path.fonts.build + '/*' }, function(){ return cur_path.fonts.to + '/*'}) ).pipe(clean());
+   gulp.src(cur_path.fonts.from)
+       .pipe(gulp.dest(  ifElse(isBuild, function(){ return cur_path.fonts.build }, function(){ return cur_path.fonts.to}) ));
 });
 // end copy fonts
 
-// start server gulp watch on port 8080
-gulp.task('watch', ['server'], function() {
+// start server gulp watch on port 8001
+gulp.task('watch', ['server', 'browserify','images','images_content','root_dir','fonts','sass','css_vendor','html'], function() {
+    isBuild = false;
 
-   isBuild = false;
+    livereload.listen();
 
-   isMobile = false;
-   gulp.run('watch_helper');
+    gulp.watch(cur_path.css.watch_from, ['sass']);
 
-   isMobile = true;
-   gulp.run('watch_helper');
+    gulp.watch(cur_path.html.template, ['html']);
+
+    gulp.watch(cur_path.js.watch_from, ['browserify']);
 
 });
 
-gulp.task('watch_helper', function() {
-     var p = isMobile? path.mobile : path.desktop;
-     // prefabrication project
-     gulp.run('browserify');
-     gulp.run('images');
-     gulp.run('images_content');
-     gulp.run('root_dir');
-     gulp.run('fonts');
-     gulp.run('sass');
-     gulp.run('css_vendor');
-     gulp.run('html');
-
-     //start watch changes
-     gulp.watch(p.css.watch_from, function() {
-         gulp.run('sass');
-     });
-
-      gulp.watch(p.html.template, function() {
-          gulp.run('html');
-      });
-
-     gulp.watch(p.js.watch_from, function() {
-          gulp.run('browserify');
-     });
-
-     //gulp.watch([p.js.from_vendors], function() {
-     //    gulp.run('js');
-     //});
-     //gulp.watch(p.images.from, function() {
-     //    gulp.run('images');
-     //});
-     //
-     //gulp.watch(p.images_content.from, function() {
-     //    gulp.run('images_content');
-     //});
-
-     //gulp.watch(p.fonts.from, function() {
-     //    gulp.run('fonts');
-     //});
-
-     //gulp.watch([p.css.from_vendor], function() {
-     //    gulp.run('css_vendor');
-     //});
-});
-
-
- //fabrication project
+//fabrication project
 
 gulp.task('build', function() {
-    isMobile = false;
-    gulp.run('build_helper');
-
-    isMobile = true;
-    gulp.run('build_helper');
+    isBuild = true;
+    gulp.start('browserify');
+    gulp.start('images');
+    gulp.start('images_content');
+    gulp.start('root_dir');
+    gulp.start('fonts');
+    gulp.start('sass');
+    gulp.start('css_vendor');
+    gulp.start('html');
 });
 
- gulp.task('build_helper', function() {
-     isBuild = true;
-     gulp.run('browserify');
-     gulp.run('images');
-     gulp.run('images_content');
-     gulp.run('root_dir');
-     gulp.run('fonts');
-     gulp.run('sass');
-     gulp.run('css_vendor');
-     gulp.run('html');
- });
  //end fabrication project
 
