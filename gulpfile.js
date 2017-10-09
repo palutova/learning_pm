@@ -26,7 +26,8 @@ var gulp = require('gulp'), // Сообственно Gulp JS
     http = require('http'), //to start server
     st = require('st'), //to start server
     clean = require('gulp-clean'), // to remove folders end files
-    util = require('gulp-util');
+    util = require('gulp-util'),
+    fs = require('fs');
 
 var isBuild = false,
     isMobile = false;
@@ -155,6 +156,15 @@ gulp.task('server', function(done) {
 });
 // end server create
 
+//
+function checkDirectorySync(directory) {
+    try {
+        fs.statSync(directory);
+    } catch(e) {
+        fs.mkdirSync(directory);
+    }
+}
+
 // SCSS init
 gulp.task('sass', function () {
     gulp.src(cur_path.css.from)
@@ -242,8 +252,16 @@ gulp.task('fonts', function() {
 });
 // end copy fonts
 
+gulp.task('megaclean', function () {
+    // gulp.src('./www/*').pipe(clean());
+
+    checkDirectorySync('./www/*');
+    return gulp.src('www')
+        .pipe(clean({force: true}))
+});
+
 // start server gulp watch on port 8001
-gulp.task('watch', ['server', 'browserify','images','images_content','root_dir','fonts','sass','css_vendor','html'], function() {
+gulp.task('watch_helper', ['server', 'browserify','images','images_content','root_dir','fonts','sass','css_vendor','html'], function() {
     isBuild = false;
 
     livereload.listen();
@@ -255,7 +273,12 @@ gulp.task('watch', ['server', 'browserify','images','images_content','root_dir',
     gulp.watch(cur_path.js.watch_from, ['browserify']);
 
 });
-
+gulp.task('watch', function() {
+    gulp.start('megaclean');
+    setTimeout(function() {
+        gulp.start('watch_helper')
+    }, 1000);
+});
 //fabrication project
 
 gulp.task('build', function() {
