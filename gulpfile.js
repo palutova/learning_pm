@@ -68,7 +68,7 @@ var path = {
             build: './build/js'
         },
         html: {
-            template: 'app/template/*.html',
+            template: ['app/template/*.html','app/template/*/*.html'],
             template_point: './app/template/*.html',
             to: './www/',
             build: './build/'
@@ -116,7 +116,7 @@ var path = {
             build: './build/mobile/js'
         },
         html: {
-            template: 'app/template_mobile/*.html',
+            template: ['app/template_mobile/*.html','app/template_mobile/*/*.html'],
             template_point: './app/template_mobile/*.html',
             to: './www/mobile/',
             build: './build/mobile/'
